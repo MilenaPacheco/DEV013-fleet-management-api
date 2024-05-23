@@ -151,7 +151,7 @@
  *           format: date
  *         required: true
  *         description: Fecha de las trayectorias
- *         example: "2023-01-02"
+ *         example: "2008-02-02"
  *       - in: query
  *         name: page
  *         schema:
