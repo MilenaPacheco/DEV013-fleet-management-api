@@ -1,5 +1,5 @@
 # Fleet Management Software API
-![zach-vessels-utMdPdGDc8M-unsplash](https://firebasestorage.googleapis.com/v0/b/laboratoria-945ea.appspot.com/o/fleet-management-api-java%2Fthumb.jpg?alt=media)
+![Fleet Management API](ruta/a/tu/imagen/A_visually_appealing_illustration_for_a_Fleet_Mana.png)
 
 ## Resumen del Proyecto
 
