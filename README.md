@@ -1,5 +1,5 @@
 # Fleet Management Software API
-![Fleet Management API](ruta/a/tu/imagen/A_visually_appealing_illustration_for_a_Fleet_Mana.png)
+![Fleet Management API](img\fleetManagement.webp)
 
 ## Resumen del Proyecto
 
