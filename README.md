@@ -70,6 +70,22 @@ Nuestra clienta ha instalado dispositivos GPS en sus taxis, que utilizan señale
 - El código del endpoint está en un repositorio de GitHub.
 - El endpoint cuenta con tests unitarios y E2E.
 
+## Documentación con Swagger
+
+La API cuenta con una documentación detallada utilizando Swagger. Esta documentación proporciona una interfaz interactiva para probar los endpoints y obtener información sobre sus métodos, parámetros y respuestas.
+
+### Endpoints Documentados
+
+- **GET /taxis**: Obtener taxis
+- **GET /taxis/{id}**: Obtener información de un taxi
+- **GET /trajectories**: Obtener trayectorias
+- **GET /trajectories/last/{id}**: Obtener la última trayectoria de un taxi
+- **GET /trajectories/last**: Obtener las últimas trayectorias de todos los taxis
+
+Puedes acceder a la documentación de la API en el siguiente enlace:
+
+[Documentación de la API](http://localhost:3001/taxi-doc/#/)
+
 ## Tecnologías Utilizadas
 
 - **Node.js**: Plataforma de desarrollo utilizada para construir la API.
