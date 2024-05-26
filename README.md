@@ -1,32 +1,50 @@
 # Fleet Management Software API
 
-## Índice
+En este proyecto he desarrollado una API REST para un Fleet Management Software, destinado a consultar las ubicaciones de los vehículos de una empresa de taxis en Beijing, China. La API maneja las ubicaciones de casi 10 mil taxis, proporcionando un acceso eficiente y rápido a los datos de ubicación en tiempo real.
 
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación del proyecto](#5-criterios-de-aceptación-del-proyecto)
-* [6. Stack de tecnologías](#6-stack-de-tecnologías)
-* [7. Pistas, tips y lecturas complementarias](#7-pistas-tips-y-lecturas-complementarias)
-* [8. Funcionalidades opcionales](#8-funcionalidades-opcionales)
+## Tecnologías Utilizadas
 
-***
+- **Node.js**: Plataforma de desarrollo utilizada para construir la API.
+- **TypeScript**: Lenguaje utilizado para añadir tipos estáticos y mejorar la calidad del código.
+- **Express**: Framework de Node.js utilizado para construir el servidor y manejar las rutas.
+- **Prisma**: ORM (Object-Relational Mapping) utilizado para interactuar con la base de datos PostgreSQL.
+- **PostgreSQL**: Sistema de gestión de bases de datos utilizado para almacenar las ubicaciones de los taxis.
+- **Swagger**: Herramienta utilizada para documentar la API y proporcionar una interfaz interactiva para probar los endpoints.
+- **Jest**: Framework de pruebas utilizado para realizar pruebas unitarias y de integración.
+- **Supertest**: Librería utilizada para realizar pruebas de endpoints HTTP.
+- **Nodemailer**: Módulo para Node.js utilizado para enviar correos electrónicos con reportes.
+- **json2xls**: Librería utilizada para convertir respuestas JSON en archivos Excel.
 
-## 1. Preámbulo
+## Funcionalidades Principales
 
-De acuerdo con
-[Wikipedia](https://es.wikipedia.org/wiki/Internet_de_las_cosas),
-la internet de las cosas (IoT, por sus siglas en inglés)​ es un concepto que
-se refiere a una interconexión digital de objetos cotidianos con internet.
-Constituye un cambio radical en la calidad de vida de las personas en la
-sociedad, ofreciendo nuevas oportunidades en el acceso a
-datos, educación, seguridad, asistencia
-sanitaria y en el transporte, entre otros campos. Por ejemplo,
-en logística y manejo de flotas, se puede hacer seguimiento en
-todo momento de la ubicación y las condiciones de vehículos
-mediante sensores inalámbricos conectados a internet que envían alertas en
-caso de eventualidades (demoras, daños, robos, etc.).
+- **Consulta de ubicaciones de taxis**: Endpoints para obtener la última ubicación de un taxi específico por su ID o placa.
+- **Paginación y filtrado**: Implementación de paginación y filtrado para manejar grandes volúmenes de datos de manera eficiente.
+- **Generación de reportes**: Generación de archivos Excel con las ubicaciones de los taxis y envío por correo electrónico.
+- **Documentación interactiva**: Documentación de la API utilizando Swagger para facilitar la prueba y comprensión de los endpoints.
+
+## Instalación y Uso
+
+1. Clona el repositorio: `git clone https://github.com/MilenaPacheco/fleet-management-api.git`
+2. Instala las dependencias: `npm install`
+3. Configura las variables de entorno en un archivo `.env`
+4. Ejecuta las migraciones de Prisma: `npx prisma migrate dev`
+5. Inicia el servidor: `npm run dev`
+6. Accede a la documentación de la API en `http://localhost:3001/docs`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ![zach-vessels-utMdPdGDc8M-unsplash](https://firebasestorage.googleapis.com/v0/b/laboratoria-945ea.appspot.com/o/fleet-management-api-java%2Fthumb.jpg?alt=media)
 
