@@ -95,6 +95,37 @@ Puedes acceder a la documentación de la API en el siguiente enlace:
 
 [Documentación de la API](http://localhost:3001/taxi-doc/#/)
 
+## 4. Consideraciones técnicas
+
+Boilerplate o estructura del proyecto:
+
+```├── src
+│   ├── controllers
+│   │   ├── taxiController.ts
+│   │   └── trajectoriesController.ts
+│   ├── routes
+│   │   ├── taxiRoutes.ts
+│   │   └── trajectoriesRoutes.ts
+│   ├── services
+│   │   ├── taxiService.ts
+│   │   └── trajectoriesService.ts
+│   ├── utils
+│   │   ├── errorHandlers.ts
+│   │   └── database.ts
+│   ├── prisma
+│   │   └── schema.prisma
+│   ├── index.ts
+│   └── app.ts
+├── tests
+│   ├── taxiController.spec.ts
+│   └── trajectoriesController.spec.ts
+├── .env
+├── .gitignore
+├── README.md
+├── package.json
+└── tsconfig.json
+```
+
 ## Tecnologías Utilizadas
 
 - **Node.js**: Plataforma de desarrollo utilizada para construir la API.
