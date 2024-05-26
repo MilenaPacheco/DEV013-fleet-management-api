@@ -95,7 +95,7 @@ Puedes acceder a la documentación de la API en el siguiente enlace:
 
 [Documentación de la API](http://localhost:3001/taxi-doc/#/)
 
-## 4. Consideraciones técnicas
+## Consideraciones técnicas
 
 Boilerplate o estructura del proyecto:
 
@@ -125,6 +125,51 @@ Boilerplate o estructura del proyecto:
 ├── package.json
 └── tsconfig.json
 ```
+
+## Descripción de Archivos y Carpetas
+
+### src
+Contiene el código fuente de la aplicación.
+
+#### controllers
+Controladores que manejan las solicitudes y respuestas.
+- **taxiController.ts**: Controlador para los endpoints relacionados con los taxis.
+- **trajectoriesController.ts**: Controlador para los endpoints relacionados con las trayectorias.
+
+#### routes
+Define las rutas de la API.
+- **taxiRoutes.ts**: Rutas para los endpoints de taxis.
+- **trajectoriesRoutes.ts**: Rutas para los endpoints de trayectorias.
+
+#### services
+Lógica de negocio y comunicación con la base de datos.
+- **taxiService.ts**: Servicio para la lógica relacionada con los taxis.
+- **trajectoriesService.ts**: Servicio para la lógica relacionada con las trayectorias.
+
+#### utils
+Utilidades y funciones auxiliares.
+- **errorHandlers.ts**: Manejadores de errores personalizados.
+- **database.ts**: Configuración de la conexión a la base de datos.
+
+#### prisma
+Archivos relacionados con Prisma ORM.
+- **schema.prisma**: Esquema de la base de datos.
+
+#### Otros
+- **index.ts**: Punto de entrada principal de la aplicación.
+- **app.ts**: Configuración de la aplicación Express.
+
+### tests
+Contiene los archivos de pruebas.
+- **taxiController.spec.ts**: Pruebas para el controlador de taxis.
+- **trajectoriesController.spec.ts**: Pruebas para el controlador de trayectorias.
+
+### Archivos de Configuración
+- **.env**: Archivo de configuración de variables de entorno.
+- **.gitignore**: Archivo para excluir ciertos archivos y carpetas del control de versiones.
+- **README.md**: Documentación del proyecto.
+- **package.json**: Dependencias y scripts del proyecto.
+- **tsconfig.json**: Configuración de TypeScript.
 
 ## Tecnologías Utilizadas
 
