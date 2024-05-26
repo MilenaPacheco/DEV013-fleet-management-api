@@ -193,15 +193,6 @@ Contiene los archivos de pruebas.
 5. Inicia el servidor: `npm run dev`
 6. Accede a la documentación de la API en `http://localhost:3001/docs`
 
-## Contribuciones
-
-Si deseas contribuir a este proyecto, por favor sigue estos pasos:
-1. Haz un fork del repositorio.
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-feature`).
-3. Haz commit de tus cambios (`git commit -m 'Añadir nueva feature'`).
-4. Haz push a la rama (`git push origin feature/nueva-feature`).
-5. Abre un Pull Request.
-
 ## Contacto
 
 Para cualquier consulta, no dudes en contactarme en [mile_fall@hotmail.com](mailto:mile_fall@hotmail.com).
