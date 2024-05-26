@@ -74,6 +74,15 @@ Nuestra clienta ha instalado dispositivos GPS en sus taxis, que utilizan señale
 
 La API cuenta con una documentación detallada utilizando Swagger. Esta documentación proporciona una interfaz interactiva para probar los endpoints y obtener información sobre sus métodos, parámetros y respuestas.
 
+## Manejo de Errores
+
+El manejo de errores en la API se realiza mediante clases personalizadas que permiten distinguir diferentes tipos de errores y devolver respuestas adecuadas:
+
+- **NotFoundError**: Utilizado cuando no se encuentran resultados en la base de datos.
+- **DatabaseError**: Utilizado para errores relacionados con la base de datos.
+
+Estas clases permiten manejar los errores de manera eficiente y proporcionar respuestas claras y específicas a los clientes de la API.
+
 ### Endpoints Documentados
 
 - **GET /taxis**: Obtener taxis
