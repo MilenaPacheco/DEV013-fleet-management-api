@@ -43,5 +43,40 @@ const getTaxiService = async (id: string) => {
     }
   }
 };
+
+const createTaxiService = async (id: number, plate: string) => {
+  try {
+    const taxi = await prisma.taxis.create({
+      data: {
+          id,
+          plate
+        },
+    });
+    return taxi
+  } catch (error) {
+    throw new DatabaseError('Error al acceder a la base de datos');
+  }
+};
+
+const updateTaxiService = async (id: any, newData: any) => {
+  try {
+    console.log('update', newData)
+    let whereCondition: any = {};
+    if(isNaN(id)){
+      whereCondition = id;
+    }else{
+      whereCondition.plate = id;
+    }
+    console.log('whereCondition', whereCondition)
+    const updateTaxi = await prisma.taxis.update({
+      where: whereCondition,
+      data: newData
+    });
+    return updateTaxi
+  } catch (error) {
+    throw new DatabaseError('Error al acceder a la base de datos');
+  }
   
-export { getTaxisService, getTaxiService, NotFoundError, DatabaseError  };
+}
+  
+export { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, NotFoundError, DatabaseError  };
