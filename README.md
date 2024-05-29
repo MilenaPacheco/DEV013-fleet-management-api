@@ -1,6 +1,5 @@
 # Fleet Management Software API
-![Fleet Management API](img\fleetManagement.webp)
-
+![Fleet Management API](img/FleetManagementAPI.jpg)
 ## Resumen del Proyecto
 
 En este proyecto he construido la API REST de un Fleet Management Software para consultar las ubicaciones de los vehículos de una empresa de taxis en Beijing, China. Esta API maneja las ubicaciones de casi 10 mil taxis, proporcionando un acceso eficiente y rápido a los datos de ubicación en tiempo real.
