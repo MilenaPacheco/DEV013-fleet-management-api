@@ -10,6 +10,10 @@ const router = express.Router();
 router.get('/taxis', taxis.getTaxis);
 router.get('/trajectories', trajectories.getTrajectories);
 router.get('/trajectories/last', trajectories.getLastTrajectories);
+//Ideas para completar el CRUD
+router.post('/taxis', taxis.createTaxi);
+router.put('/taxis/:id', taxis.updateTaxi);
+
 
 //opcional GET por placa o id
 //router.get('/trajectories/last/taxi', trajectories.getLastTrajectory);
