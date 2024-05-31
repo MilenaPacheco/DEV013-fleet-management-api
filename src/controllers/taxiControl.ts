@@ -90,25 +90,34 @@ const createTaxi = async (req: Request, res: Response) => {
   }
 };
 
-export const updateTaxi = async (req: Request, res: Response) => {
-  const taxi = req.params;
+const updateTaxi = async (req: Request, res: Response) => {
+  const { id } = req.params; // Obtener id desde los parámetros de la ruta
   const newData = req.body;
-  console.log('taxi', taxi)
-  //http://localhost:3001/taxis?id=123
+
   try {
-    // Verificar que se ingresen los datos necesarios
-    if (!taxi) {
-      return res.status(400).json({ error: 'Ingrese ID o placa' });
+    // Verificar que se ingrese el ID
+    if (!id) {
+      return res.status(400).json({ error: 'Ingrese ID o placa del taxi a actualizar' });
     }
-    // Verificar que id sea un número
-    /*const numericId = parseInt(id as string);
-    if (isNaN(numericId)) {
-      return res.status(400).json({ error: 'ID inválido' });
-    }*/
-    const updatedTaxi = await updateTaxiService(taxi, newData);
+    //verificar contenido del body
+    if(!Object.keys(newData).length){
+      return res.status(400).json({ error: 'Ingrese algún valor a actualizar' });
+    }
+    //verificar contenido de la forma correcta del ID
+    let numericId = parseInt(id);
+    if (isNaN(numericId) && !id.match(/^[A-Z]{4}-\d{4}$/)) {
+      return res.status(400).json({ error: 'ID o placa inválidos' });
+    }
+    //verificar contenido de la forma correcta del body
+    if(isNaN(parseInt(newData.id)) || !newData.plate.match(/^[A-Z]{4}-\d{4}$/)){
+      return res.status(400).json({ error: 'Ingrese ID y placa válidos para actualizar' });
+    }
+    const updatedTaxi = await updateTaxiService(id, newData);
     return res.status(200).json(updatedTaxi);
   } catch (error) {
-    if (error instanceof DatabaseError) {
+    if (error instanceof NotFoundError) {
+      return res.status(404).json({ error: error.message });
+    } else if (error instanceof DatabaseError) {
       return res.status(500).json({ error: error.message });
     } else {
       console.error('Error inesperado:', error);
