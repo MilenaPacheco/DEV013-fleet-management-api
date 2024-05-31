@@ -58,25 +58,47 @@ const createTaxiService = async (id: number, plate: string) => {
   }
 };
 
-const updateTaxiService = async (id: any, newData: any) => {
+
+const updateTaxiService = async (identifier: string, newData: any) => {
   try {
-    console.log('update', newData)
+    // Parsear el identifier en caso de que sea número y asignar el criterio de búsqueda
     let whereCondition: any = {};
-    if(isNaN(id)){
-      whereCondition = id;
-    }else{
-      whereCondition.plate = id;
+    if (!isNaN(parseInt(identifier))) {
+      whereCondition.id = parseInt(identifier);
+    } else {
+      whereCondition.plate = identifier;
     }
-    console.log('whereCondition', whereCondition)
-    const updateTaxi = await prisma.taxis.update({
-      where: whereCondition,
-      data: newData
+    // Parsear el id dentro de newData si existe y es un número
+    newData.id = parseInt(newData.id)
+    // Realizar verificación y actualización en una sola transacción
+    const updatedTaxi = await prisma.$transaction(async (prisma) => {
+      const existingTaxi = await prisma.taxis.findUnique({
+        where: whereCondition
+      });
+      const existingId = await prisma.taxis.findUnique({
+        where: {id: newData.id}
+      })
+      if (!existingTaxi) {
+        throw new NotFoundError('Taxi no encontrado');
+      }
+      if(existingId){
+        throw new NotFoundError('ID ya existe');
+      }
+      return prisma.taxis.update({
+        where: whereCondition,
+        data: newData 
+      });
     });
-    return updateTaxi
+    //console.log('updateTaxi', updatedTaxi);
+    return updatedTaxi;
   } catch (error) {
-    throw new DatabaseError('Error al acceder a la base de datos');
+    console.error('Error al actualizar el taxi:', error);
+    if (error instanceof NotFoundError) {
+      throw error;
+    } else {
+      throw new DatabaseError('Error al acceder a la base de datos');
+    }
   }
-  
-}
+};
   
 export { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, NotFoundError, DatabaseError  };
