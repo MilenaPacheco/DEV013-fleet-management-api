@@ -91,6 +91,7 @@ const createTaxi = async (req: Request, res: Response) => {
 };
 
 const updateTaxi = async (req: Request, res: Response) => {
+  //actualizar taxi para 
   const { id } = req.params; // Obtener id desde los parámetros de la ruta
   const newData = req.body;
 
