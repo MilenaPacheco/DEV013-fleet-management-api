@@ -96,7 +96,7 @@ const updateTaxi = async (req: Request, res: Response) => {
   const newData = req.body;
 
   try {
-    // Verificar que se ingrese el ID
+    // Verificar que se ingrese alg//un valor ID en la url
     if (!id) {
       return res.status(400).json({ error: 'Ingrese ID o placa del taxi a actualizar' });
     }
@@ -104,13 +104,13 @@ const updateTaxi = async (req: Request, res: Response) => {
     if(!Object.keys(newData).length){
       return res.status(400).json({ error: 'Ingrese algún valor a actualizar' });
     }
-    //verificar contenido de la forma correcta del ID
+    //verificar contenido de la forma correcta del ID o placa
     let numericId = parseInt(id);
     if (isNaN(numericId) && !id.match(/^[A-Z]{4}-\d{4}$/)) {
       return res.status(400).json({ error: 'ID o placa inválidos' });
     }
     //verificar contenido de la forma correcta del body
-    if(isNaN(parseInt(newData.id)) || !newData.plate.match(/^[A-Z]{4}-\d{4}$/)){
+    if(!isNaN(parseInt(newData.id)) || !newData.plate.match(/^[A-Z]{4}-\d{4}$/)){
       return res.status(400).json({ error: 'Ingrese ID y placa válidos para actualizar' });
     }
     const updatedTaxi = await updateTaxiService(id, newData);
