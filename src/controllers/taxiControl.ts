@@ -109,8 +109,9 @@ const updateTaxi = async (req: Request, res: Response) => {
     if (isNaN(numericId) && !id.match(/^[A-Z]{4}-\d{4}$/)) {
       return res.status(400).json({ error: 'ID o placa inválidos' });
     }
-    //verificar contenido de la forma correcta del body
-    if(!isNaN(parseInt(newData.id)) || !newData.plate.match(/^[A-Z]{4}-\d{4}$/)){
+    // Verificar contenido de la forma correcta del body
+    // El id debe ser completamente numérico y la placa debe tener la estructura correcta
+    if ((newData.id && !/^\d+$/.test(newData.id)) || (newData.plate && !/^[A-Z]{4}-\d{4}$/.test(newData.plate))) {
       return res.status(400).json({ error: 'Ingrese ID y placa válidos para actualizar' });
     }
     const updatedTaxi = await updateTaxiService(id, newData);
@@ -127,6 +128,23 @@ const updateTaxi = async (req: Request, res: Response) => {
   }
 };
 
+const deleteTaxi = async (req: Request, res: Response) => {
+  const { id } = req.params; // Obtener id desde los parámetros de la ruta
+  try {
+    if(!id){
+      return res.status(400).json({ error: 'Ingrese ID o placa del taxi que desea eliminar ' });
+    }
+    //verificar contenido de la forma correcta del ID o placa
+    let numericId = parseInt(id);
+    if ((id && !/^\d+$/.test(id)) || (id && !/^[A-Z]{4}-\d{4}$/.test(id))) {
+      return res.status(400).json({ error: 'ID o placa inválidos' });
+    }
+    console.log('TODOBIEN')
+  } catch (error) {
+    
+  }
+}
+
 
 // id, fecha ----- http://localhost:3001/trajectories?taxiId=6418&date=02-02-2008
-export default { getTaxis, getTaxi, createTaxi, updateTaxi}       
+export default { getTaxis, getTaxi, createTaxi, updateTaxi, deleteTaxi}       

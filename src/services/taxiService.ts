@@ -100,5 +100,10 @@ const updateTaxiService = async (identifier: string, newData: any) => {
     }
   }
 };
+
+
+const deleteTaxiService = async () => {
+
+}
   
-export { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, NotFoundError, DatabaseError  };
+export { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, deleteTaxiService, NotFoundError, DatabaseError  };

@@ -13,6 +13,7 @@ router.get('/trajectories/last', trajectories.getLastTrajectories);
 //Ideas para completar el CRUD
 router.post('/taxis', taxis.createTaxi);
 router.put('/taxis/:id', taxis.updateTaxi);
+router.delete('/taxis/:id', taxis.deleteTaxi);
 
 
 //opcional GET por placa o id
