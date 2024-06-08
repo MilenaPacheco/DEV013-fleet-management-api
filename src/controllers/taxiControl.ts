@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, NotFoundError, DatabaseError } from '../services/taxiService';
+import { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, deleteTaxiService, NotFoundError, DatabaseError } from '../services/taxiService';
 import { error } from 'console';
 
 
@@ -135,13 +135,20 @@ const deleteTaxi = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Ingrese ID o placa del taxi que desea eliminar ' });
     }
     //verificar contenido de la forma correcta del ID o placa
-    let numericId = parseInt(id);
-    if ((id && !/^\d+$/.test(id)) || (id && !/^[A-Z]{4}-\d{4}$/.test(id))) {
+    if (!/^\d+$/.test(id) && !/^[A-Z]{4}-\d{4}$/.test(id)) {
       return res.status(400).json({ error: 'ID o placa inválidos' });
     }
-    console.log('TODOBIEN')
+    const deletedTaxi = deleteTaxiService(id);
+    return res.status(200).json({message: 'El Taxi se ha eliminado exitosamente', taxi: deletedTaxi})
   } catch (error) {
-    
+    if (error instanceof NotFoundError) {
+      return res.status(404).json({ error: error.message });
+    } else if (error instanceof DatabaseError) {
+      return res.status(500).json({ error: error.message });
+    } else {
+      console.error('Error inesperado:', error);
+      return res.status(500).json({ error: 'Error de Conexión' });
+    }
   }
 }
 

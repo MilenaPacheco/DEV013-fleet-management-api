@@ -1,3 +1,4 @@
+import { error } from 'console';
 import prisma from '../db';
 class NotFoundError extends Error {};
 class DatabaseError extends Error {};
@@ -63,7 +64,7 @@ const updateTaxiService = async (identifier: string, newData: any) => {
   try {
     // Parsear el identifier en caso de que sea número y asignar el criterio de búsqueda
     let whereCondition: any = {};
-    if (!isNaN(parseInt(identifier))) {
+    if (!isNaN(parseInt(identifier))) { 
       whereCondition.id = parseInt(identifier);
     } else {
       whereCondition.plate = identifier;
@@ -102,8 +103,34 @@ const updateTaxiService = async (identifier: string, newData: any) => {
 };
 
 
-const deleteTaxiService = async () => {
-
-}
+const deleteTaxiService = async (id: string) => {
+  try {
+    //verificar si el id es un ID o una placa
+    let whereCondition: any = {};
+    if(/^\d+$/.test(id)){
+      whereCondition.id = parseInt(id);
+    } else{
+      whereCondition.plate = id;
+    }
+    const deletedTaxi = await prisma.$transaction(async (prisma) => {
+      const existingTaxi =await prisma.taxis.findUnique({
+        where: whereCondition
+      })
+      if(!existingTaxi){
+        throw new NotFoundError('El Taxi no existe');
+      }
+      return prisma.taxis.delete({
+        where: whereCondition,
+      })
+    })
+    return deletedTaxi
+  } catch (error) {
+    if(error instanceof NotFoundError){
+      throw error;
+    } else{
+      throw new DatabaseError('Error al acceder a la base de datos');
+    }
+  }
+};
   
 export { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, deleteTaxiService, NotFoundError, DatabaseError  };
