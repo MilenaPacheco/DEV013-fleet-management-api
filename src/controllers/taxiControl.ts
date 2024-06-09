@@ -1,17 +1,5 @@
 import { Request, Response } from 'express';
 import { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, deleteTaxiService, NotFoundError, DatabaseError } from '../services/taxiService';
-import { error } from 'console';
-
-
-/*getTaxisService:          
-Intenta obtener una lista de taxis de la base de datos.
-Lanza un NotFoundError si no se encuentran taxis.
-Lanza un DatabaseError si ocurre cualquier otro error durante la consulta a la base de datos.
-
-getTaxisService:
-Intenta obtener un taxi específico de la base de datos utilizando un ID o una placa.
-Lanza un NotFoundError si no se encuentra el taxi.
-Lanza un DatabaseError si ocurre cualquier otro error durante la consulta a la base de datos*/
 
 //considerar los nombres
 const getTaxis = async (req: Request, res: Response) => {
@@ -84,7 +72,10 @@ const createTaxi = async (req: Request, res: Response) => {
   } catch (error) {
     if(error instanceof DatabaseError){
       return res.status(500).json({ error: error.message });
-    }else{
+    }else if(error instanceof NotFoundError){
+      return res.status(400).json({ error: error.message });
+    }
+    else{
       return res.status(500).json({ error: 'Error de Conexión' });
     }
   }
@@ -139,8 +130,8 @@ const deleteTaxi = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'ID o placa inválidos' });
     }
     const deletedTaxi = deleteTaxiService(id);
-    return res.status(200).json({message: 'El Taxi se ha eliminado exitosamente', taxi: deletedTaxi})
-  } catch (error) {
+    return res.status(200).json({message: `El Taxi ${id} se ha eliminado exitosamente `})
+  } catch (error) {`${name}`
     if (error instanceof NotFoundError) {
       return res.status(404).json({ error: error.message });
     } else if (error instanceof DatabaseError) {

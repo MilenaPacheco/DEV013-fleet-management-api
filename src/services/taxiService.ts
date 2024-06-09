@@ -31,11 +31,17 @@ const getTaxiService = async (id: string) => {
     } else {
       whereCondition.id = parseInt(id);
     }
-    const taxi = await prisma.taxis.findFirst({ where: whereCondition });
-    if (!taxi) {
-      throw new NotFoundError('No se encontró ningún taxi con los datos proporcionados');
-    }
-    return taxi;
+    const getTaxi = await prisma.$transaction(async(prisma) => {
+      const existingTaxi = await prisma.taxis.findUnique({
+        where: whereCondition
+      })
+      if(!existingTaxi){
+        throw new NotFoundError('No se encontró ningún taxi con los datos proporcionados');
+      }
+      const taxi = await prisma.taxis.findFirst({ where: whereCondition });
+      return taxi
+    })
+    return getTaxi;
   } catch (error) {
     if (error instanceof NotFoundError) {
       throw error;
@@ -47,15 +53,35 @@ const getTaxiService = async (id: string) => {
 
 const createTaxiService = async (id: number, plate: string) => {
   try {
-    const taxi = await prisma.taxis.create({
-      data: {
+    const createTaxi = await prisma.$transaction(async (prisma) => {
+      const existingId = await prisma.taxis.findUnique({
+        where: {id: id}
+      })
+      if (existingId) {
+        throw new NotFoundError('El ID ya existe');
+      }
+      const existingPlate = await prisma.taxis.findFirst({
+        where: {plate: plate}
+      })
+      if (existingPlate) {
+        throw new NotFoundError('La placa ya existe');
+      }
+      const taxi = await prisma.taxis.create({
+        data: {
           id,
           plate
         },
-    });
-    return taxi
+      });
+      //console.log('HOLA', taxi)
+      return taxi;
+    })
+    return createTaxi;
   } catch (error) {
-    throw new DatabaseError('Error al acceder a la base de datos');
+    if (error instanceof NotFoundError) {
+      throw error;
+    } else {
+      throw new DatabaseError('Error al acceder a la base de datos');
+    }
   }
 };
 
