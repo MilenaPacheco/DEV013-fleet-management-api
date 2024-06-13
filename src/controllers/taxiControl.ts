@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getTaxisService, getTaxiService, createTaxiService, updateTaxiService, deleteTaxiService, NotFoundError, DatabaseError } from '../services/taxiService';
 
-//considerar los nombres
+//Verificar los endpoints en cada uno de las peticiones
 const getTaxis = async (req: Request, res: Response) => {
     try {
         //http://localhost:3001/taxis?_page=1&_limit=5
